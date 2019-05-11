@@ -22,3 +22,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+
+server/config.py
+server/__pycache__

@@ -1,0 +1,7 @@
+mysql-connector==2.1.6
+simplejson
+uwsgi
+flask
+flask_cors
+flask-restful
+flask-marshmallow
