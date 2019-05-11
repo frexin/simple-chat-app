@@ -1,0 +1,102 @@
+body {
+    font-size: 12px;
+    font-family: Tahoma, sans-serif;
+    color: #000;
+}
+
+.chat-container {
+    margin: 0 auto;
+    width: 360px;
+    border: 1px solid black;
+}
+
+.chat-container .msg-history {
+    padding: 15px;
+    min-height: 480px;
+    overflow-y: auto;
+    background-color: #ECE5DD;
+}
+
+ul.messages {
+    margin: 0;
+    padding: 0;
+}
+
+li.msg {
+    display: block;
+    padding: 10px;
+    margin-bottom: 15px;
+
+    background-color: #DCF8C6;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    font-size: 13px;
+}
+
+li.msg:nth-child(2n) {
+    background-color: #FFFFFF;
+}
+
+li.msg .author {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #3740a7;
+}
+
+li.msg .msg-text {
+    font-size: 14px;
+}
+
+li.msg .msg-date {
+    margin-top: 5px;
+    font-size: 11px;
+    color: #4c4d51;
+    text-align: right;
+}
+
+.msg-form {
+    padding: 15px;
+    background-color: #EEEDED;
+}
+
+.msg-form .form-elements {
+    display: flex;
+    align-items: center;
+}
+
+.msg-form .form-msg-area {
+    flex-grow: 1;
+}
+
+.msg-form .form-msg-area textarea {
+    background-color: #FEFEFE;
+    border: none;
+    min-height: 85px;
+    width: 100%;
+    font-family: inherit;
+}
+
+.msg-form .form-submit input {
+    width: 75px;
+    height: 50px;
+    background-color: #128C7E;
+    border: none;
+    border-radius: 10px;
+    margin-left: 15px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.msg-form .form-submit input:hover {
+    background-color: #075E54;
+}
+
+.msg-form .form-author-name input {
+    width: 100%;
+    margin-bottom: 10px;
+    border: none;
+    height: 30px;
+    text-indent: 10px;
+}
+
