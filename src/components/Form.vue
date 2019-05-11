@@ -2,10 +2,16 @@
     <div class="msg-form">
         <form @submit.prevent="formSubmit">
             <div class="form-author-name">
-                <input v-model="author" type="text" :disabled="savedAuthor" name="author_name" placeholder="Enter your name"/>
+                <input v-model="author" type="text" :disabled="savedAuthor" name="author_name"
+                       :class="{'error': $v.author.$error }" placeholder="Enter your name" />
+                <div v-if="$v.author.$error" class="input-error">This field is required!</div>
             </div>
             <div class="form-elements">
-                <div class="form-msg-area"><textarea v-model="text" name="message_text"></textarea></div>
+                <div class="form-msg-area">
+                    <textarea :class="{'error': $v.text.$error }" v-model="text"
+                              name="message_text"></textarea>
+                    <div v-if="$v.text.$error" class="input-error">This field is required!</div>
+                </div>
                 <div class="form-submit"><input type="submit" name="submit" value="Send"/></div>
             </div>
         </form>
@@ -13,8 +19,12 @@
 </template>
 
 <script>
+    import { validationMixin } from 'vuelidate'
+    import { required } from 'vuelidate/lib/validators'
+
     export default {
         name: "Form",
+        mixins: [validationMixin],
         data: () => {
             return {
                 author: null, text: null, savedAuthor: null
@@ -26,6 +36,12 @@
         },
         methods: {
             formSubmit: function() {
+                this.$v.$touch();
+
+                if (this.$v.$invalid) {
+                    return false;
+                }
+
                 this.saveAuthorName();
 
                 let msg = {
@@ -37,13 +53,21 @@
                 this.$emit('formSubmit', msg);
 
                 this.text = null;
+                this.$v.$reset();
             },
-
             saveAuthorName: function () {
                 if (this.author) {
                     window.localStorage.setItem('authorName', this.author);
                     this.savedAuthor = this.author;
                 }
+            }
+        },
+        validations: {
+            text: {
+                required
+            },
+            author: {
+                required
             }
         }
     }
@@ -65,6 +89,7 @@
     }
 
     .form-msg-area textarea {
+        margin-top: 10px;
         background-color: #FEFEFE;
         border: none;
         min-height: 85px;
@@ -90,9 +115,17 @@
 
     .form-author-name input {
         width: 100%;
-        margin-bottom: 10px;
         border: none;
         height: 30px;
         text-indent: 10px;
+    }
+
+    .error {
+        outline: 1px solid red;
+    }
+
+    .input-error {
+        color: red;
+        margin-top: 5px;
     }
 </style>
