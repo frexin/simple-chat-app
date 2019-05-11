@@ -2,7 +2,7 @@
     <div class="msg-form">
         <form @submit.prevent="formSubmit">
             <div class="form-author-name">
-                <input v-model="author" type="text" name="author_name" placeholder="Enter your name"/>
+                <input v-model="author" type="text" :disabled="savedAuthor" name="author_name" placeholder="Enter your name"/>
             </div>
             <div class="form-elements">
                 <div class="form-msg-area"><textarea v-model="text" name="message_text"></textarea></div>
@@ -17,11 +17,17 @@
         name: "Form",
         data: () => {
             return {
-                author: null, text: null
+                author: null, text: null, savedAuthor: null
             }
         },
+        mounted() {
+            this.author = window.localStorage.getItem('authorName');
+            this.savedAuthor = this.author;
+        },
         methods: {
-            formSubmit: function(ev) {
+            formSubmit: function() {
+                this.saveAuthorName();
+
                 let msg = {
                     date: new Date().toLocaleString(),
                     author: this.author,
@@ -30,8 +36,14 @@
 
                 this.$emit('formSubmit', msg);
 
-                this.author = null;
                 this.text = null;
+            },
+
+            saveAuthorName: function () {
+                if (this.author) {
+                    window.localStorage.setItem('authorName', this.author);
+                    this.savedAuthor = this.author;
+                }
             }
         }
     }

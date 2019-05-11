@@ -1,5 +1,5 @@
 <template>
-    <li class="msg">
+    <li class="msg" v-bind:class="{mine: mine}">
         <div class="author">{{ author }}</div>
         <div class="msg-text">{{ text }}</div>
         <div class="msg-date">{{ date }}</div>
@@ -9,7 +9,7 @@
 <script>
     export default {
         name: "message",
-        props: ['author', 'text', 'date'],
+        props: ['author', 'text', 'date', 'mine'],
     }
 </script>
 
@@ -27,6 +27,10 @@
 
     li.msg:nth-child(2n) {
         background-color: #FFFFFF;
+    }
+
+    li.msg.mine {
+        background-color: #f8c5d2;
     }
 
     .author {

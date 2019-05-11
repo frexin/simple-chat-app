@@ -27,6 +27,7 @@
         },
         methods: {
             handleNewMessage: function(msg) {
+                msg.mine = true;
                 this.messages.push(msg);
             }
         }

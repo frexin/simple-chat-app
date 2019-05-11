@@ -1,7 +1,7 @@
 <template>
     <div class="msg-history">
         <ul class="messages">
-            <message v-for="msg in messages" :author="msg.author" :text="msg.text" :date="msg.date" />
+            <message v-for="msg in messages" :author="msg.author" :text="msg.text" :date="msg.date" :mine="msg.mine" />
         </ul>
     </div>
 </template>
@@ -15,9 +15,6 @@
 
         components: {
             Message
-        },
-        addNewMessage(msg_data) {
-
         }
     }
 </script>
