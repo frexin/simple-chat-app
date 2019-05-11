@@ -1,5 +1,10 @@
 <template>
     <div id="app" class="chat-container">
+        <div class="error-description" v-if="error">
+            <p><strong>Error</strong></p>
+            <p>{{ error }}</p>
+        </div>
+
         <msg-history :messages="messages" :username="username" />
         <msg-form v-on:formSubmit="handleNewMessage" />
     </div>
@@ -14,6 +19,7 @@
         name: 'app',
         data: () => {
             return {
+                'error': null,
                 'messages' : [],
                 'username': window.localStorage.getItem('authorName')
             }
@@ -34,12 +40,17 @@
                     method: 'post',
                     url: '/chat',
                     data: msg
-                })
+                }).catch(err => {
+                    this.error = 'Unable to save new message.';
+                });
             },
             refreshList: function () {
                 axios.get('/chat').then(response => {
                     this.messages = response.data;
-                });
+                })
+                .catch(err => {
+                    this.error = 'Unable to load last messages from server.';
+                })
             }
         }
     }
@@ -52,9 +63,25 @@
         color: #000;
     }
 
+    p {
+        margin-top: 0;
+    }
+
     .chat-container {
         margin: 0 auto;
         width: 360px;
         border: 1px solid black;
+        position: relative;
+    }
+
+    .error-description {
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        top: 0;
+        padding: 15px 0;
+        text-indent: 15px;
+        background-color: rgba(255, 0, 0, 0.65);
+        font-size: 13px;
     }
 </style>
