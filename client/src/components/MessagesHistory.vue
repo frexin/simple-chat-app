@@ -1,7 +1,8 @@
 <template>
     <div class="msg-history">
         <ul class="messages">
-            <message v-for="msg in messages" :author="msg.author" :text="msg.text" :date="msg.date" :mine="msg.mine" />
+            <message v-for="msg in messages" :author="msg.author" :text="msg.text" :date="msg.date"
+                     v-bind:key="msg.id" :username="username" />
         </ul>
     </div>
 </template>
@@ -11,7 +12,7 @@
 
     export default {
         name: "msg-history",
-        props: ['messages'],
+        props: ['messages', 'username'],
 
         components: {
             Message

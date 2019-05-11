@@ -45,7 +45,7 @@
                 this.saveAuthorName();
 
                 let msg = {
-                    date: new Date().toLocaleString(),
+                    date: new Date(),
                     author: this.author,
                     text: this.text
                 };

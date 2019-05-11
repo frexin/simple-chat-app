@@ -11,7 +11,7 @@ class Chat(Resource):
         self.dbhelper = kwargs['db']
 
     def get(self):
-        sql = "SELECT id, author, text, date FROM messages ORDER BY date DESC"
+        sql = "SELECT id, author, text, date FROM messages ORDER BY date ASC"
         results = self.dbhelper.fetch_records(sql)
 
         return results

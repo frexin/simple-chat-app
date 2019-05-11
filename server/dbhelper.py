@@ -18,7 +18,8 @@ class DbHelper:
         if self.conn is not None:
             self.close()
 
-        self.conn = mysql.connector.connect(host=host, user=user, password=password, database=dbname, autocommit=True)
+        self.conn = mysql.connector.connect(host=host, user=user, password=password, database=dbname,
+                                            autocommit=True, buffered=True)
 
     def fetch_records(self, sql):
         cursor = self.get_cursor()
@@ -51,4 +52,6 @@ class DbHelper:
         return self.conn.close()
 
     def get_cursor(self):
+        self.conn.reconnect()
+
         return self.conn.cursor(buffered=True, dictionary=True)

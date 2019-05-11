@@ -1,15 +1,23 @@
 <template>
-    <li class="msg" v-bind:class="{mine: mine}">
+    <li class="msg" v-bind:class="{mine: isMine}">
         <div class="author">{{ author }}</div>
         <div class="msg-text">{{ text }}</div>
-        <div class="msg-date">{{ date }}</div>
+        <div class="msg-date">{{ humanDate }}</div>
     </li>
 </template>
 
 <script>
     export default {
         name: "message",
-        props: ['author', 'text', 'date', 'mine'],
+        props: ['author', 'text', 'date', 'mine', 'username'],
+        computed: {
+            humanDate: function () {
+                return new Date(this.date).toLocaleString()
+            },
+            isMine: function () {
+                return this.author === this.username;
+            }
+        }
     }
 </script>
 

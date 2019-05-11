@@ -1,25 +1,25 @@
 <template>
     <div id="app" class="chat-container">
-        <msg-history :messages="messages" />
+        <msg-history :messages="messages" :username="username" />
         <msg-form v-on:formSubmit="handleNewMessage" />
     </div>
 </template>
 
 <script>
     import MessagesHistory from './components/MessagesHistory.vue'
-    import Form from "./components/Form.vue";
+    import Form from "./components/Form.vue"
+    import axios from "axios"
 
     export default {
         name: 'app',
         data: () => {
             return {
-                'messages' : [
-                    {'author': 'Joffrey', 'text': 'Brilliant', 'date': '10 Mar, 2018'},
-                    {'author': 'NINJA', 'text': 'Great resource, thanks bro', 'date': '10 Mar, 2018, 09:55'},
-                    {'author': 'I am mister', 'text': 'Thanks peter', 'date': '10 Mar, 2018, 10:19'},
-                    {'author': 'Patricia', 'text': 'Sounds good to me', 'date': '10 Mar, 2018, 10:32'},
-                ]
+                'messages' : [],
+                'username': window.localStorage.getItem('authorName')
             }
+        },
+        mounted() {
+            this.refreshList();
         },
         components: {
             'msg-history': MessagesHistory,
@@ -27,8 +27,19 @@
         },
         methods: {
             handleNewMessage: function(msg) {
-                msg.mine = true;
+                this.username = msg.author;
                 this.messages.push(msg);
+
+                axios({
+                    method: 'post',
+                    url: '/chat',
+                    data: msg
+                })
+            },
+            refreshList: function () {
+                axios.get('/chat').then(response => {
+                    this.messages = response.data;
+                });
             }
         }
     }
