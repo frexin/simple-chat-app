@@ -18,3 +18,11 @@
 3. Install libraries: `yarn install`
 4. Compile and hot-reload for development: `yarn run serve`
 5. ..or build minified version for production: `yarn run build`
+
+
+## Features
+
+- responsive design
+- send and view messages
+- client and backend side validation
+- easy to extend
