@@ -25,7 +25,7 @@
     li.msg {
         display: block;
         padding: 10px;
-        margin-bottom: 15px;
+        margin: 15px auto 0;
 
         background-color: #DCF8C6;
         border-radius: 5px;
@@ -56,5 +56,11 @@
         font-size: 11px;
         color: #4c4d51;
         text-align: right;
+    }
+
+    @media screen and (min-width: 961px) {
+        li.msg {
+            max-width: 760px;
+        }
     }
 </style>

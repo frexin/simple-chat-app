@@ -93,4 +93,10 @@
         background-color: rgba(255, 0, 0, 0.65);
         font-size: 13px;
     }
+
+    @media screen and (min-width: 961px) {
+        .chat-container {
+            width: 960px;
+        }
+    }
 </style>
