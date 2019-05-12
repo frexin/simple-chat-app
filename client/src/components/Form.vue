@@ -4,7 +4,6 @@
             <div class="form-author-name">
                 <input v-model="author" type="text" :disabled="savedAuthor" name="author_name"
                        :class="{'error': $v.author.$error }" placeholder="Enter your name" />
-                <div v-if="$v.author.$error" class="input-error">This field is required!</div>
             </div>
             <div class="form-elements">
                 <div class="form-msg-area">
@@ -77,6 +76,9 @@
     .msg-form {
         padding: 15px;
         background-color: #EEEDED;
+        height: 150px;
+        margin-bottom: auto;
+        border-top: 1px solid black;
     }
 
     .form-elements {

@@ -57,6 +57,12 @@
 </script>
 
 <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<style>
     #app {
         font-size: 12px;
         font-family: Tahoma, sans-serif;
@@ -69,9 +75,12 @@
 
     .chat-container {
         margin: 0 auto;
-        width: 360px;
-        border: 1px solid black;
+        width: 100%;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100vh;
     }
 
     .error-description {

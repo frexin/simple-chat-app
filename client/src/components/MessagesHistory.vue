@@ -23,9 +23,9 @@
 <style scoped>
     .msg-history {
         padding: 15px;
-        height: 480px;
         overflow-y: auto;
         background-color: #ECE5DD;
+        flex-grow: 1;
     }
 
     .msg-history::-webkit-scrollbar {
